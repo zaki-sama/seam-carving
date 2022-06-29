@@ -1,5 +1,5 @@
 import java.awt.Color;
-import java.util.List;
+import java.util.*;
 
 import javalib.worldimages.FromFileImage;
 
@@ -15,9 +15,10 @@ public class Pixel {
   private Pixel topRight;
   private Pixel bottomRight;
   private Pixel bottomLeft;
+  private SeamInfo seam;
 
   public Pixel(FromFileImage image, int row, int col) {
-    Color color = image.getColorAt(row, col);
+    Color color = image.getColorAt(col, row);
     this.color = color;
     this.brightness = calcBrightness(color);
   }
@@ -63,6 +64,24 @@ public class Pixel {
             && (this.bottomRight == null || this.bottomRight.topLeft == this);
   }
 
+  public void setSeam(int r) {
+    if(r == 0) {
+      this.seam = new SeamInfo(this);
+    } else {
+      SeamInfo minimum = Util.getMinimumWeightSeam(this.upperNeighbors());
+      this.seam = new SeamInfo(this, minimum);
+    }
+  }
+
+  public double getEnergy() {
+    //System.out.println(energy);
+    return this.energy;
+  }
+
+  public SeamInfo getSeam() {
+    return this.seam;
+  }
+
   //PRIVATE METHODS ---------------------------------------------------
   private static double calcBrightness(Color color) {
     double average = (color.getRed() + color.getGreen() + color.getBlue()) / 3.0;
@@ -75,5 +94,21 @@ public class Pixel {
     } else {
       return pixel.brightness;
     }
+  }
+
+  private List<SeamInfo> upperNeighbors() {
+    List<SeamInfo> upperNeighbors = new ArrayList<>();
+    if(this.topLeft != null) {
+      upperNeighbors.add(topLeft.seam);
+    } else if(this.top != null) {
+      upperNeighbors.add(top.seam);
+    } else if(this.topRight != null) {
+      upperNeighbors.add(topRight.seam);
+    }
+    return upperNeighbors;
+  }
+
+  public Color getColor() {
+    return this.color;
   }
 }

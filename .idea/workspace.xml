@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7eee90ce-ed6d-4c90-bd3d-9b5184f154ba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Pixel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SeamCarver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Util.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/ImageTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SeamCarving.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SeamCarving.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pixel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pixel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SeamCarver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SeamCarver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SeamInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SeamInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ImageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ImageTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit3 Test Class" />
       </list>
     </option>
   </component>
@@ -43,6 +44,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
     "jdk.selected.JAVA_MODULE": "11",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -51,6 +54,12 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="junit.framework.TestCase" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
       <recent name="" />
     </key>
   </component>
@@ -79,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1656440702790</updated>
-      <workItem from="1656440704243" duration="12220000" />
+      <workItem from="1656440704243" duration="22912000" />
     </task>
     <servers />
   </component>

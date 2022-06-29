@@ -11,4 +11,21 @@ public class Util {
       return null;
     }
   }
+
+  public static SeamInfo getMinimumWeightInfo(SeamInfo topLeft, SeamInfo top, SeamInfo topRight) {
+    double minimum = Math.min(topRight.getTotalWeight(),
+            Math.min(topLeft.getTotalWeight(), top.getTotalWeight()));
+    if(minimum == topLeft.getTotalWeight()) {
+      return topLeft;
+    } else if(minimum == top.getTotalWeight()) {
+      return top;
+    }
+    return topRight;
+  }
+
+  public static SeamInfo getMinimumWeightSeam(List<SeamInfo> upperNeighbors) throws NoSuchElementException {
+    Optional<SeamInfo> minimum = upperNeighbors.stream().min(
+            (o1, o2) -> (int) (o1.getTotalWeight() - o2.getTotalWeight()));
+    return minimum.get();
+  }
 }

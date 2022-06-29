@@ -1,11 +1,16 @@
+import junit.framework.*;
+
 import org.junit.Test;
+
+import tester.*;
 
 import static org.junit.Assert.assertEquals;
 
-public class ImageTest {
+public class ImageTest extends TestCase {
 
-  @Test
   public void testMakeImage() {
-    Image img = new SeamCarver().loadImage("images/mozaic.png");
+    SeamCarver carver = new SeamCarver("images/balloons.jpg");
+    carver.bigBang(carver.width, carver.height, 1/28.0);
   }
+
 }
