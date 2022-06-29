@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class ImageTest extends TestCase {
 
   public void testMakeImage() {
-    SeamCarver carver = new SeamCarver("images/balloons.jpg");
+    SeamCarver carver = new SeamCarver("images/check.png");
     carver.bigBang(carver.width, carver.height, 1/28.0);
   }
 

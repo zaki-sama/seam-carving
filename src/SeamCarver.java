@@ -5,9 +5,10 @@ import javalib.worldimages.*;
 public class SeamCarver extends World {
 
   private Image image;
+  private int count;
+  private boolean vertical;
   public static int height;
   public static int width;
-  public int count;
 
   public SeamCarver(String filename) {
     FromFileImage file = new FromFileImage(filename);
@@ -15,6 +16,7 @@ public class SeamCarver extends World {
     this.height = this.image.getHeight();
     this.width = this.image.getWidth();
     this.count = 0;
+    this.vertical = true;
   }
 
   @Override
@@ -32,20 +34,27 @@ public class SeamCarver extends World {
 
   @Override
   public void onTick() {
-    if(image.getWidth() > 600) {
-      image.seamReset();
-      image.displaySeam();
+    if((image.getWidth() > width*0.1) && (image.getHeight() > height*0.1)) {
+      image.setupSeam(vertical);
       if(count % 2 == 0) {
-        image.displaySeam();
+        image.removeSeam(vertical);
       } else {
-        image.removeSeam();
+        image.displaySeam();
       }
       count++;
     }
   }
 
+  @Override
+  public void onKeyEvent(String key) {
+    if(key.equals(" ")) {
+      image.removeSeam(vertical);
+      this.vertical = !this.vertical;
+    }
+  }
+
   public static void main(String[] args) {
-    SeamCarver carver = new SeamCarver("images/balloons.jpg");
+    SeamCarver carver = new SeamCarver("images/mask.png");
     carver.bigBang(carver.width, carver.height, 1/28.0);
   }
 }
