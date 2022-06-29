@@ -4,7 +4,7 @@ import java.util.*;
 import javalib.worldimages.FromFileImage;
 
 public class Pixel {
-  public Color color;
+  private Color color;
   private final double brightness;
   private double energy;
   private Pixel top;
@@ -64,19 +64,11 @@ public class Pixel {
             && (this.bottomRight == null || this.bottomRight.topLeft == this);
   }
 
-  public void setSeam(boolean vertical, int row, int col) {
-    if(vertical) {
-      this.updateSeam(row, this.notNullNeighbors(this.topLeft, this.top, this.topRight));
-    } else {
-      this.updateSeam(col, this.notNullNeighbors(this.topLeft, this.left, this.bottomLeft));
-    }
-  }
-
-  private void updateSeam(int index, List<SeamInfo> neighbors) {
-    if(index == 0) {
+  public void setSeam(int r) {
+    if(r == 0) {
       this.seam = new SeamInfo(this);
     } else {
-      SeamInfo minimum = Util.getMinimumWeightSeam(neighbors);
+      SeamInfo minimum = Util.getMinimumWeightSeam(this.upperNeighbors());
       this.seam = new SeamInfo(this, minimum);
     }
   }
@@ -103,18 +95,18 @@ public class Pixel {
     }
   }
 
-  private List<SeamInfo> notNullNeighbors(Pixel first, Pixel second, Pixel third) {
-    List<SeamInfo> rightNeighbors = new ArrayList<>();
-    if(first != null) {
-      rightNeighbors.add(first.seam);
+  private List<SeamInfo> upperNeighbors() {
+    List<SeamInfo> upperNeighbors = new ArrayList<>();
+    if(this.topLeft != null) {
+      upperNeighbors.add(topLeft.seam);
     }
-    if(second != null) {
-      rightNeighbors.add(second.seam);
+    if(this.top != null) {
+      upperNeighbors.add(top.seam);
     }
-    if(third != null) {
-      rightNeighbors.add(third.seam);
+    if(this.topRight != null) {
+      upperNeighbors.add(topRight.seam);
     }
-    return rightNeighbors;
+    return upperNeighbors;
   }
 
   public Color getColor() {

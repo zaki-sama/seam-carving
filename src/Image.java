@@ -24,25 +24,12 @@ public class Image {
     return this.width;
   }
 
-  public void setupSeam(boolean vertical) {
+  public void seamReset() {
     this.connectPixels();
     this.checkConnections();
     this.setEnergies();
-    this.findSeams(vertical);
-    if (vertical) {
-      this.minimumSeam = this.calcMinimum(this.pixels.get(height - 1));
-    } else {
-      this.minimumSeam = this.calcMinimum(this.lastCol());
-    }
-  }
-
-  private List<Pixel> lastCol() {
-    List<Pixel> lastCol = new ArrayList<>();
-    int cols = this.width - 1;
-    for(List<Pixel> row : this.pixels) {
-      lastCol.add(row.get(cols));
-    }
-    return lastCol;
+    this.findSeams();
+    this.minimumSeam = this.calcMinimum();
   }
 
   public void displaySeam() {
@@ -52,71 +39,24 @@ public class Image {
     }
   }
 
-  public void removeSeam(boolean vertical) {
-    if (!vertical) {
-      System.out.println("hor");
-    }
+  public void removeSeam() {
     List<List<Pixel>> newImage = this.copyPixels();
     List<Pixel> seamPixels = this.minimumSeam.trace();
-
-    // Populate replacement arrays, skipping pixels in the seam
-    for (int c = 0; c < width; c++) {
-      for (int r = 0; r < height; r++) {
+    for(int r = 0; r < height; r++) {
+      for(int c = 0; c < width; c++) {
         Pixel pixel = pixels.get(r).get(c);
-        if (seamPixels.contains(pixel)) {
-          if (vertical) {
-            newImage.get(r).remove(pixel);
-          } else {
-            for (int row = r + 1; row < height; row++) {
-              newImage.get(row - 1).set(c, pixels.get(row).get(c));
-            }
-          }
+        if(seamPixels.contains(pixel)) {
+          newImage.get(r).remove(pixel);
         }
-//        } else {
-//          newImage.get(r).set(c, pixels.get(r).get(c));
-//        }
       }
-
     }
     this.pixels = newImage;
-    if(!vertical) {
-      this.deleteLastRow();
-    }
     this.recalculateDimensions();
   }
 
-  private void deleteLastRow() {
-    this.pixels.remove(this.pixels.size() - 1);
-  }
-
-//    System.out.println(seamPixels.size());
-//    int count =0;
-//    for(int r = 0; r < height; r++) {
-//      for(int c = 0; c < width; c++) {
-//        Pixel pixel = pixels.get(r).get(c);
-//        if(seamPixels.contains(pixel)) {
-//          count ++;
-//          //newImage.get(r).remove(pixel);
-//          newImage.get(r).get(c).color = Color.blue;
-//          System.out.println("size: " + newImage.get(r).size());
-//        }
-//      }
-//    }
-//    System.out.println("count: " + count);
-//    this.pixels = newImage;
-
-//    System.out.println("width0: " + this.pixels.get(0).size());
-//    System.out.println("width1: " + this.pixels.get(1).size());
-//    System.out.println("width2: " + this.pixels.get(2).size());
-//    System.out.println("width3: " + this.pixels.get(3).size());
-//    System.out.println("height: " + this.pixels.size());
-
-//    this.recalculateDimensions();
-//  }
-
   private void recalculateDimensions() {
-    this.width = this.pixels.get(0).size();
-    this.height = this.pixels.size();
+    this.height = pixels.size();
+    this.width = pixels.get(0).size();
   }
 
   private List<List<Pixel>> copyPixels() {
@@ -132,30 +72,20 @@ public class Image {
     return newImage;
   }
 
-  private SeamInfo calcMinimum(List<Pixel> lastLine) {
-    Optional<Pixel> min = lastLine.stream().min(
+  private SeamInfo calcMinimum() {
+    List<Pixel> lastRow = this.pixels.get(height - 1);
+    Optional<Pixel> min = lastRow.stream().min(
             (o1, o2) -> (int) (o1.getSeam().getTotalWeight() - o2.getSeam().getTotalWeight()));
     return min.get().getSeam();
   }
 
-  private void findSeams(boolean vertical) {
-    if(vertical) {
-      for(int r = 0; r < height; r++) {
-        for(int c = 0; c < width; c++) {
-          Pixel pixel = pixels.get(r).get(c);
-          pixel.setSeam(vertical, r, c);
-        }
-      }
-    } else {
+  private void findSeams() {
+    for(int r = 0; r < height; r++) {
       for(int c = 0; c < width; c++) {
-        for(int r = 0; r < height; r++) {
-          Pixel pixel = pixels.get(r).get(c);
-          pixel.setSeam(vertical, r, c);
-        }
+        Pixel pixel = pixels.get(r).get(c);
+        pixel.setSeam(r);
       }
     }
-
-
   }
 
   private void setEnergies() {
@@ -172,7 +102,7 @@ public class Image {
       for(int c = 0; c < width; c++) {
         Pixel pixel = pixels.get(r).get(c);
         if(!pixel.connected()) {
-          throw new IllegalStateException("Connection incorrect at " + r + ", " + c);
+          throw new IllegalStateException("Connection incorrect");
         }
       }
     }
