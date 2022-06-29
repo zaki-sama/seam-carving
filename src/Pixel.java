@@ -64,13 +64,35 @@ public class Pixel {
             && (this.bottomRight == null || this.bottomRight.topLeft == this);
   }
 
-  public void setSeam(int r) {
-    if(r == 0) {
+  public void setSeam(boolean vertical, int row, int col) {
+    if(vertical) {
+      this.updateSeam(row, this.notNullNeighbors(this.topLeft, this.top, this.topRight));
+    } else {
+      this.updateSeam(col, this.notNullNeighbors(this.topLeft, this.left, this.bottomLeft));
+    }
+  }
+
+  private void updateSeam(int index, List<SeamInfo> neighbors) {
+    if(index == 0) {
       this.seam = new SeamInfo(this);
     } else {
-      SeamInfo minimum = Util.getMinimumWeightSeam(this.upperNeighbors());
+      SeamInfo minimum = Util.getMinimumWeightSeam(neighbors);
       this.seam = new SeamInfo(this, minimum);
     }
+  }
+
+  private List<SeamInfo> notNullNeighbors(Pixel first, Pixel second, Pixel third) {
+    List<SeamInfo> neighbors = new ArrayList<>();
+    if (first != null) {
+      neighbors.add(first.seam);
+    }
+    if (second != null) {
+      neighbors.add(second.seam);
+    }
+    if (third != null) {
+      neighbors.add(third.seam);
+    }
+    return neighbors;
   }
 
   public double getEnergy() {

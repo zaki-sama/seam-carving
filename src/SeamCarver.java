@@ -7,7 +7,8 @@ public class SeamCarver extends World {
   private Image image;
   public static int height;
   public static int width;
-  public int count;
+  private int count;
+  private boolean vertical;
 
   public SeamCarver(String filename) {
     FromFileImage file = new FromFileImage(filename);
@@ -15,6 +16,7 @@ public class SeamCarver extends World {
     this.height = this.image.getHeight();
     this.width = this.image.getWidth();
     this.count = 0;
+    this.vertical = true;
   }
 
   @Override
@@ -32,15 +34,22 @@ public class SeamCarver extends World {
 
   @Override
   public void onTick() {
-    if(image.getWidth() > 600) {
-      image.seamReset();
-      image.displaySeam();
+    if((image.getWidth() > width*0.1) && (image.getHeight() > height*0.1)) {
+      image.setupSeam(vertical);
       if(count % 2 == 0) {
-        image.displaySeam();
+        image.removeSeam(vertical);
       } else {
-        image.removeSeam();
+        image.displaySeam();
       }
       count++;
+    }
+  }
+
+  @Override
+  public void onKeyEvent(String key) {
+    if(key.equals(" ")) {
+      image.removeSeam(vertical);
+      this.vertical = !this.vertical;
     }
   }
 

@@ -1,6 +1,7 @@
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javalib.worldimages.*;
 
@@ -24,12 +25,25 @@ public class Image {
     return this.width;
   }
 
-  public void seamReset() {
+  public void setupSeam(boolean vertical) {
     this.connectPixels();
     this.checkConnections();
     this.setEnergies();
-    this.findSeams();
-    this.minimumSeam = this.calcMinimum();
+    this.findSeams(vertical);
+    if (vertical) {
+      this.minimumSeam = this.calcMinimum(this.pixels.get(height - 1));
+    } else {
+      this.minimumSeam = this.calcMinimum(this.lastCol());
+    }
+  }
+
+  private ArrayList<Pixel> lastCol() {
+    ArrayList<Pixel>lastCol = new ArrayList<>();
+    int cols = this.width - 1;
+    for(List<Pixel> row : this.pixels) {
+      lastCol.add(row.get(cols));
+    }
+    return lastCol;
   }
 
   public void displaySeam() {
@@ -39,24 +53,39 @@ public class Image {
     }
   }
 
-  public void removeSeam() {
+  public void removeSeam(boolean vertical) {
     List<List<Pixel>> newImage = this.copyPixels();
     List<Pixel> seamPixels = this.minimumSeam.trace();
-    for(int r = 0; r < height; r++) {
-      for(int c = 0; c < width; c++) {
+
+    for (int c = 0; c < width; c++) {
+      for (int r = 0; r < height; r++) {
         Pixel pixel = pixels.get(r).get(c);
-        if(seamPixels.contains(pixel)) {
-          newImage.get(r).remove(pixel);
+        if (seamPixels.contains(pixel)) {
+          if (vertical) {
+            newImage.get(r).remove(pixel);
+          } else {
+            for (int row = r + 1; row < height; row++) {
+              newImage.get(row - 1).set(c, pixels.get(row).get(c));
+            }
+          }
         }
       }
     }
+
     this.pixels = newImage;
+    if(!vertical) {
+      this.deleteLastRow();
+    }
     this.recalculateDimensions();
   }
 
+  private void deleteLastRow() {
+    this.pixels.remove(this.pixels.size() - 1);
+  }
+
   private void recalculateDimensions() {
-    this.height = pixels.size();
-    this.width = pixels.get(0).size();
+    this.width = this.pixels.get(0).size();
+    this.height = this.pixels.size();
   }
 
   private List<List<Pixel>> copyPixels() {
@@ -72,18 +101,26 @@ public class Image {
     return newImage;
   }
 
-  private SeamInfo calcMinimum() {
-    List<Pixel> lastRow = this.pixels.get(height - 1);
-    Optional<Pixel> min = lastRow.stream().min(
+  private SeamInfo calcMinimum(List<Pixel> lastLine) {
+    Optional<Pixel> min = lastLine.stream().min(
             (o1, o2) -> (int) (o1.getSeam().getTotalWeight() - o2.getSeam().getTotalWeight()));
     return min.get().getSeam();
   }
 
-  private void findSeams() {
-    for(int r = 0; r < height; r++) {
-      for(int c = 0; c < width; c++) {
-        Pixel pixel = pixels.get(r).get(c);
-        pixel.setSeam(r);
+  private void findSeams(boolean vertical) {
+    if (vertical) {
+      for (int r = 0; r < height; r++) {
+        for (int c = 0; c < width; c++) {
+          Pixel pixel = pixels.get(r).get(c);
+          pixel.setSeam(true, r, c);
+        }
+      }
+    } else {
+      for (int c = 0; c < width; c++) {
+        for (int r = 0; r < height; r++) {
+          Pixel pixel = pixels.get(r).get(c);
+          pixel.setSeam(false, r, c);
+        }
       }
     }
   }
@@ -102,7 +139,7 @@ public class Image {
       for(int c = 0; c < width; c++) {
         Pixel pixel = pixels.get(r).get(c);
         if(!pixel.connected()) {
-          throw new IllegalStateException("Connection incorrect");
+          throw new IllegalStateException("Connection incorrect at " + r + ", " + c);
         }
       }
     }
@@ -118,10 +155,10 @@ public class Image {
   }
 
   private List<List<Pixel>> makeImage(FromFileImage fileImage) {
-    List<List<Pixel>> pixels = new LinkedList<>();
-    for(int r = 0; r < height; r++) {
-      List<Pixel> row = new LinkedList<>();
-      for(int c = 0; c < width; c++) {
+    List<List<Pixel>> pixels = new ArrayList<>();
+    for (int r = 0; r < height; r++) {
+      List<Pixel> row = new ArrayList<>();
+      for (int c = 0; c < width; c++) {
         row.add(new Pixel(fileImage, r, c));
       }
       pixels.add(row);
