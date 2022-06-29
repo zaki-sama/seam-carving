@@ -13,4 +13,7 @@ public class ImageTest extends TestCase {
     carver.bigBang(carver.width, carver.height, 1/28.0);
   }
 
+  public void test(Tester t) {
+    t.checkExpect(1, 2);
+  }
 }

@@ -32,10 +32,16 @@ public class Image {
     this.minimumSeam = this.calcMinimum();
   }
 
+  public void displaySeam() {
+    List<Pixel> seamPixels = this.minimumSeam.trace();
+    for(Pixel p:seamPixels) {
+      p.setColor(Color.RED);
+    }
+  }
+
   public void removeSeam() {
     List<List<Pixel>> newImage = this.copyPixels();
     List<Pixel> seamPixels = this.minimumSeam.trace();
-    System.out.println(seamPixels.size());
     for(int r = 0; r < height; r++) {
       for(int c = 0; c < width; c++) {
         Pixel pixel = pixels.get(r).get(c);
@@ -70,8 +76,6 @@ public class Image {
     List<Pixel> lastRow = this.pixels.get(height - 1);
     Optional<Pixel> min = lastRow.stream().min(
             (o1, o2) -> (int) (o1.getSeam().getTotalWeight() - o2.getSeam().getTotalWeight()));
-
-    System.out.println(min.get().getSeam().getTotalWeight());
     return min.get().getSeam();
   }
 

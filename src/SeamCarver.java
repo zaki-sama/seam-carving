@@ -1,7 +1,6 @@
 import tester.*;
 import javalib.impworld.*;
 import javalib.worldimages.*;
-import java.awt.Color;
 
 public class SeamCarver extends World {
 
@@ -33,7 +32,20 @@ public class SeamCarver extends World {
 
   @Override
   public void onTick() {
-    image.seamReset();
-    image.removeSeam();
+    if(image.getWidth() > 600) {
+      image.seamReset();
+      image.displaySeam();
+      if(count % 2 == 0) {
+        image.displaySeam();
+      } else {
+        image.removeSeam();
+      }
+      count++;
+    }
+  }
+
+  public static void main(String[] args) {
+    SeamCarver carver = new SeamCarver("images/balloons.jpg");
+    carver.bigBang(carver.width, carver.height, 1/28.0);
   }
 }

@@ -4,7 +4,7 @@ import java.util.*;
 import javalib.worldimages.FromFileImage;
 
 public class Pixel {
-  private final Color color;
+  private Color color;
   private final double brightness;
   private double energy;
   private Pixel top;
@@ -74,7 +74,6 @@ public class Pixel {
   }
 
   public double getEnergy() {
-    //System.out.println(energy);
     return this.energy;
   }
 
@@ -100,9 +99,11 @@ public class Pixel {
     List<SeamInfo> upperNeighbors = new ArrayList<>();
     if(this.topLeft != null) {
       upperNeighbors.add(topLeft.seam);
-    } else if(this.top != null) {
+    }
+    if(this.top != null) {
       upperNeighbors.add(top.seam);
-    } else if(this.topRight != null) {
+    }
+    if(this.topRight != null) {
       upperNeighbors.add(topRight.seam);
     }
     return upperNeighbors;
@@ -110,5 +111,9 @@ public class Pixel {
 
   public Color getColor() {
     return this.color;
+  }
+
+  public void setColor(Color red) {
+    this.color = red;
   }
 }
