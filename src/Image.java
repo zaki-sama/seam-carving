@@ -17,6 +17,12 @@ public class Image {
     this.pixels = this.makeImage(fileImage);
   }
 
+  public Image(List<List<Pixel>> pixels) {
+    this.height = pixels.size();
+    this.width = pixels.get(0).size();
+    this.pixels = pixels;
+  }
+
   public int getHeight() {
     return this.height;
   }
@@ -169,4 +175,5 @@ public class Image {
   public Color getColorAt(int r, int c) {
     return this.pixels.get(r).get(c).getColor();
   }
+
 }

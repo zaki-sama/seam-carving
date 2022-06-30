@@ -40,4 +40,24 @@ public class SeamInfo {
       return this.upTo.traceAccumulator(soFar);
     }
   }
+
+  public boolean contains(Pixel p) {
+    if(this.corresponding == p) {
+      return true;
+    } else if(this.upTo == null) {
+      return false;
+    } else {
+      return this.upTo.contains(p);
+    }
+  }
+
+  public SeamInfo endsWith(Pixel p) {
+    if(this.corresponding == p) {
+      return this;
+    } else if(this.upTo == null) {
+      throw new IllegalStateException();
+    } else {
+      return this.upTo.endsWith(p);
+    }
+  }
 }

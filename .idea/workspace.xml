@@ -6,6 +6,9 @@
       <change beforePath="$PROJECT_DIR$/src/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pixel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pixel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SeamCarver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SeamCarver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SeamInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SeamInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ImageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ImageTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +81,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ImageTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SeamCarving" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ImageTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ImageTest.testMakeImage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SeamCarving" />
       <option name="PACKAGE_NAME" value="" />
@@ -91,6 +104,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.SeamCarver" />
+        <item itemvalue="JUnit.ImageTest.test" />
         <item itemvalue="JUnit.ImageTest.testMakeImage" />
       </list>
     </recent_temporary>
@@ -104,7 +118,7 @@
       <option name="presentableId" value="Default" />
       <updated>1656440702790</updated>
       <workItem from="1656440704243" duration="26644000" />
-      <workItem from="1656545182799" duration="56000" />
+      <workItem from="1656545182799" duration="7232000" />
     </task>
     <servers />
   </component>

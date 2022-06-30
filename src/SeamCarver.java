@@ -34,7 +34,7 @@ public class SeamCarver extends World {
 
   @Override
   public void onTick() {
-    if((image.getWidth() > width*0.1) && (image.getHeight() > height*0.1)) {
+    if((image.getWidth() > width*0.5) && (image.getHeight() > height*0.1)) {
       image.setupSeam(vertical);
       if(count % 2 == 0) {
         image.removeSeam(vertical);
@@ -57,4 +57,5 @@ public class SeamCarver extends World {
     SeamCarver carver = new SeamCarver("images/balloons.jpg");
     carver.bigBang(carver.width, carver.height, 1/28.0);
   }
+
 }

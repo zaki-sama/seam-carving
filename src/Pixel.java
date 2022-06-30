@@ -5,7 +5,7 @@ import javalib.worldimages.FromFileImage;
 
 public class Pixel {
   private Color color;
-  private final double brightness;
+  private double brightness;
   private double energy;
   private Pixel top;
   private Pixel bottom;
@@ -21,6 +21,11 @@ public class Pixel {
     Color color = image.getColorAt(col, row);
     this.color = color;
     this.brightness = calcBrightness(color);
+  }
+
+  public Pixel(double energy) {
+    //this.color = color;
+    this.energy = energy;
   }
 
   //PUBLIC METHODS ---------------------------------------------------
