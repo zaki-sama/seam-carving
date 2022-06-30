@@ -10,17 +10,11 @@ public class Image {
   private int width;
   private List<List<Pixel>> pixels;
   private SeamInfo minimumSeam;
-
-  public Image(FromFileImage fileImage) {
-    this.height = (int) fileImage.getHeight();
-    this.width = (int) fileImage.getWidth();
-    this.pixels = this.makeImage(fileImage);
-  }
-
+  
   public Image(List<List<Pixel>> pixels) {
     this.height = pixels.size();
     this.width = pixels.get(0).size();
-    this.pixels = pixels;
+    this.pixels = this.makeImage(pixels);
   }
 
   public int getHeight() {
