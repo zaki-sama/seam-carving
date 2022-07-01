@@ -10,10 +10,10 @@ import static org.junit.Assert.assertEquals;
 
 public class ImageTest extends TestCase {
 
-//  public void testMakeImage() {
-//    SeamCarver carver = new SeamCarver("images/balloons.jpg");
-//    carver.bigBang(carver.width, carver.height, 1/28.0);
-//  }
+  public void testMakeImage() {
+    SeamCarver carver = new SeamCarver("images/balloons.jpg");
+    carver.bigBang(carver.width, carver.height, 1/28.0);
+  }
 
 //  @Test
 //  public void test() {
