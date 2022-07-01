@@ -1,13 +1,6 @@
-import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
 import java.util.*;
-import java.util.List;
-
-import javax.imageio.*;
 
 public class Util {
-
   public static Pixel getPixelAt(List<List<Pixel>> pixels, int row, int col) {
     boolean inBounds = (row >= 0 && col >= 0
             && row < pixels.size()) && col < pixels.get(0).size();
