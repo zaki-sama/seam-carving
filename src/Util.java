@@ -62,7 +62,7 @@ public class Util {
         Color c = image.getColorAt(row, col);
         im.setRGB(col, row, c.getRGB());
       }
-    }
+    } 
     return im;
   }
 }
