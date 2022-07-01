@@ -17,15 +17,9 @@ public class Pixel {
   private Pixel bottomLeft;
   private SeamInfo seam;
 
-  public Pixel(FromFileImage image, int row, int col) {
-    Color color = image.getColorAt(col, row);
+  public Pixel(Color color) {
     this.color = color;
     this.brightness = calcBrightness(color);
-  }
-
-  public Pixel(double energy) {
-    //this.color = color;
-    this.energy = energy;
   }
 
   //PUBLIC METHODS ---------------------------------------------------
