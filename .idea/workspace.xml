@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7eee90ce-ed6d-4c90-bd3d-9b5184f154ba" name="Changes" comment="" />
+    <list default="true" id="7eee90ce-ed6d-4c90-bd3d-9b5184f154ba" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SeamCarver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +42,7 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit3&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Volumes/GoogleDrive/My Drive/Portfolio/CS Portfolio/SeamCarving&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
@@ -55,7 +59,14 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SeamCarver">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="SeamCarving" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SeamCarver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SeamCarver" />
       <module name="SeamCarving" />
@@ -95,6 +106,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.SeamCarver" />
         <item itemvalue="JUnit.ImageTest.test" />
         <item itemvalue="JUnit.ImageTest.testMakeImage" />
@@ -111,7 +123,12 @@
       <updated>1656440702790</updated>
       <workItem from="1656440704243" duration="26644000" />
       <workItem from="1656545182799" duration="7232000" />
-      <workItem from="1656639328278" duration="1190000" />
+      <workItem from="1656639328278" duration="1348000" />
+      <workItem from="1656648589935" duration="4165000" />
+      <workItem from="1668440103212" duration="490000" />
+      <workItem from="1668440961801" duration="10000" />
+      <workItem from="1668478135289" duration="92000" />
+      <workItem from="1675621397569" duration="106000" />
     </task>
     <servers />
   </component>

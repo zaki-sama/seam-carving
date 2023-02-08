@@ -2,7 +2,7 @@ import tester.*;
 import javalib.impworld.*;
 import javalib.worldimages.*;
 
-public class SeamCarver {
+public class Main {
 
   public static void main(String[] args) {
     new Controller(new Model(), new View());
